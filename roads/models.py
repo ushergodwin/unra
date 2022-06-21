@@ -41,6 +41,12 @@ class Road(models.Model):
     constructor_id = models.ForeignKey(Contractor, on_delete=models.CASCADE, max_length=10)
     route_id = models.ForeignKey(Route, on_delete=models.CASCADE, max_length=10)
     road_map = models.TextField()
+
+    class ROAD_STATUS_CHOICES(models.TextChoices):
+        P = 'P', ('Pending')
+        O = 'O', ('Ongoing')
+        C = 'C', ('Complete')
+    road_status = models.CharField(max_length = 15, choices = ROAD_STATUS_CHOICES.choices, default = 'Pending')     
     
     
 class Maintenance(models.Model):
@@ -66,7 +72,7 @@ class Maintenance(models.Model):
     staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE, max_length=10)
     contractor_id = models.ForeignKey(Contractor, on_delete=models.CASCADE, max_length=10)
     start_date = models.DateField()
-    end_date = models.DateField();
+    end_date = models.DateField()
     maintenance_type = models.CharField(max_length=20, choices=MAINTENANCE_TYPE_CHOICES.choices)
     activities = models.CharField(max_length=20, choices=ACTIVITIES_CHOICES.choices)
     
