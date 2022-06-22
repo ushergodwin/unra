@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from roads.admin import unra_admin
+from roads.views import roads_view
 urlpatterns = [
+    path('', roads_view.index, name='roads.index'),
     path('roads/', include('roads.urls')),
     path('unra/', unra_admin.urls),
 ]
